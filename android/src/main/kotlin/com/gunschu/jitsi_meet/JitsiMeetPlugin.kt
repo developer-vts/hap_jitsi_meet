@@ -29,7 +29,7 @@ public class JitsiMeetPlugin() : FlutterPlugin, MethodCallHandler, ActivityAware
     // The EventChannel for broadcasting JitsiMeetEvents to Flutter
     private lateinit var eventChannel: EventChannel
 
-    private var activity: Activity? = null
+    private var activity: Activity = null
 
     constructor(activity: Activity) : this() {
         this.activity = activity
@@ -118,7 +118,7 @@ public class JitsiMeetPlugin() : FlutterPlugin, MethodCallHandler, ActivityAware
         val userInfo = JitsiMeetUserInfo()
         userInfo.displayName = call.argument("userDisplayName")
         userInfo.email = call.argument("userEmail")
-        if (call.argument<String?>("userAvatarURL") != null) {
+        if (call.argument<String>("userAvatarURL") != null) {
             userInfo.avatar = URL(call.argument("userAvatarURL"))
         }
 
@@ -137,13 +137,13 @@ public class JitsiMeetPlugin() : FlutterPlugin, MethodCallHandler, ActivityAware
                 .setRoom(room)
                 .setSubject(call.argument("subject"))
                 .setToken(call.argument("token"))
-                .setAudioMuted(call.argument("audioMuted") ?: false)
-                .setAudioOnly(call.argument("audioOnly") ?: false)
-                .setVideoMuted(call.argument("videoMuted") ?: false)
+                .setAudioMuted(call.argument("audioMuted") : false)
+                .setAudioOnly(call.argument("audioOnly") : false)
+                .setVideoMuted(call.argument("videoMuted") : false)
                 .setUserInfo(userInfo)
 
         // Add feature flags into options, reading given Map
-        if (call.argument<HashMap<String, Any>?>("featureFlags") != null) {
+        if (call.argument<HashMap<String, Any>>("featureFlags") != null) {
             val featureFlags = call.argument<HashMap<String, Any>>("featureFlags")
             featureFlags!!.forEach { (key, value) ->
                 if (value is Boolean) {
@@ -165,14 +165,14 @@ public class JitsiMeetPlugin() : FlutterPlugin, MethodCallHandler, ActivityAware
 
     private fun closeMeeting(call: MethodCall, result: Result) {
         val intent = Intent(JITSI_MEETING_CLOSE)
-        activity?.sendBroadcast(intent)
+        activity.sendBroadcast(intent)
         result.success(null)
     }
 
     private fun toggleShareScreen(call: MethodCall, result: Result) {
         val intent = Intent(TOGGLE_SCREEN_SHARE)
         intent.putExtra("enabled", true)
-        activity?.sendBroadcast(intent)
+        activity.sendBroadcast(intent)
         result.success(null)
     }
 

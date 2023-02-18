@@ -13,50 +13,50 @@ class JitsiMeetEventStreamHandler private constructor(): EventChannel.StreamHand
         val instance = JitsiMeetEventStreamHandler()
     }
 
-    private var eventSink: EventChannel.EventSink? = null
+    private var eventSink: EventChannel.EventSink = null
 
-    override fun onListen(arguments: Any?, eventSink: EventChannel.EventSink?) {
+    override fun onListen(arguments: Any, eventSink: EventChannel.EventSink) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onListen")
         this.eventSink = eventSink
     }
 
-    override fun onCancel(arguments: Any?) {
+    override fun onCancel(arguments: Any) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onCancel")
         eventSink = null
     }
 
-    fun onConferenceWillJoin(data: MutableMap<String, Any>?) {
+    fun onConferenceWillJoin(data: MutableMap<String, Any>) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onConferenceWillJoin")
-        data?.put("event", "onConferenceWillJoin")
-        eventSink?.success(data)
+        data.put("event", "onConferenceWillJoin")
+        eventSink.success(data)
     }
 
-    fun onConferenceJoined(data: MutableMap<String, Any>?) {
+    fun onConferenceJoined(data: MutableMap<String, Any>) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onConferenceJoined")
-        data?.put("event", "onConferenceJoined")
-        eventSink?.success(data)
+        data.put("event", "onConferenceJoined")
+        eventSink.success(data)
     }
 
-    fun onConferenceTerminated(data: MutableMap<String, Any>?) {
+    fun onConferenceTerminated(data: MutableMap<String, Any>) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onConferenceTerminated")
-        data?.put("event", "onConferenceTerminated")
-        eventSink?.success(data)
+        data.put("event", "onConferenceTerminated")
+        eventSink.success(data)
     }
 
     fun onPictureInPictureWillEnter() {
         Log.d(JITSI_PLUGIN_TAG, "davidJitsiMeetEventStreamHandler.onPictureInPictureWillEnter")
         var data : HashMap<String, String>
                 = HashMap<String, String> ()
-        data?.put("event", "onPictureInPictureWillEnter")
-        eventSink?.success(data)
+        data.put("event", "onPictureInPictureWillEnter")
+        eventSink.success(data)
     }
 
     fun onPictureInPictureTerminated() {
         Log.d(JITSI_PLUGIN_TAG, "davidJitsiMeetEventStreamHandler.onPictureInPictureTerminated")
         var data : HashMap<String, String>
                 = HashMap<String, String> ()
-        data?.put("event", "onPictureInPictureTerminated")
-        eventSink?.success(data)
+        data.put("event", "onPictureInPictureTerminated")
+        eventSink.success(data)
     }
 
 }
