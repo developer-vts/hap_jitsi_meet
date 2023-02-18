@@ -2,7 +2,7 @@
   package="com.gunschu.jitsi_meet">
     <application>
         <activity
-            android:name="com.gunschu.jitsi_meet.JitsiMeetPluginActivity"
+            android:name=".JitsiMeetPluginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:resizeableActivity="true"
@@ -11,9 +11,6 @@
             android:fitsSystemWindows="true"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustResize">
-            <layout android:defaultHeight="300dp"
-                android:defaultWidth="300dp"
-                android:gravity="top|end"/>
         </activity>
     </application>
 </manifest>
